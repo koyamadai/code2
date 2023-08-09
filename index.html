@@ -8,36 +8,15 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
-        }
-
-        .background-container {
-            position: fixed;
-            width: 100%;
-            height: 100%;
             background-image: url('poster.png');
             background-size: cover;
-            z-index: -1;
             animation: backgroundScroll 20s linear infinite;
         }
 
-        @keyframes backgroundScroll {
-            0% {
-                background-position: 0 0;
-            }
-            100% {
-                background-position: 0 100%;
-            }
-        }
-
-        .content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .image-section {
+            text-align: center;
             padding: 30px;
             color: white;
-            z-index: 1;
         }
 
         .image-gallery {
@@ -47,28 +26,13 @@
         }
 
         .image-container {
-            position: relative;
             max-width: 80%;
             margin: 0 auto;
-        }
-
-        .image-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.3);
-            border-radius: 20px;
-            border: 1px solid rgba(0, 0, 0, 0.2);
-            z-index: 1;
         }
 
         #image {
             width: 100%;
             border-radius: 20px;
-            position: relative;
-            z-index: 2;
         }
 
         .img-rounded {
@@ -126,7 +90,17 @@
             }
         }
 
-        /* フード画像のスタイル */
+        /* 背景スクロールアニメーション */
+        @keyframes backgroundScroll {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 100% 0;
+            }
+        }
+
+        /* 画像上部に固定 */
         .food-container {
             position: fixed;
             bottom: 0;
@@ -139,24 +113,20 @@
             background-color: rgba(255, 255, 255, 0.8);
         }
 
-        .food-img {
+        #foodImage {
             max-width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
         }
     </style>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="background-container"></div>
-
-    <section class="content">
+    <section class="image-section">
         <h2>スタンプゲット！！</h2>
         <div class="image-gallery">
             <!-- study_image.jpgを中央配置 -->
             <div class="image-container">
-                <div class="image-overlay"></div>
                 <img src="study_image.jpg" id="image" alt="スタンプ">
             </div>
         </div>
@@ -169,7 +139,8 @@
     </section>
 
     <div class="food-container">
-        <img src="food.png" class="food-img" alt="フード">
+        <!-- food.pngを表示 -->
+        <img src="food.png" id="foodImage" alt="おいしいご飯">
     </div>
 
     <script>
