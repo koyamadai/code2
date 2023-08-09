@@ -8,24 +8,36 @@
         body {
             margin: 0;
             padding: 0;
-            overflow: hidden;
             font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
         }
 
         .background-container {
             position: fixed;
             width: 100%;
             height: 100%;
-            overflow: scroll;
             background-image: url('poster.png');
             background-size: cover;
             z-index: -1;
+            animation: backgroundScroll 20s linear infinite;
         }
 
-        .image-section {
-            text-align: center;
+        @keyframes backgroundScroll {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 0 100%;
+            }
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 30px;
             color: white;
+            z-index: 1;
         }
 
         .image-gallery {
@@ -118,17 +130,19 @@
         .food-container {
             position: fixed;
             bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 999;
-            max-width: 100%;
-            display: none;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 2;
+            padding: 10px 0;
+            background-color: rgba(255, 255, 255, 0.8);
         }
 
         .food-img {
+            max-width: 100%;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease-in-out;
         }
     </style>
     <!-- Google Fonts -->
@@ -137,7 +151,7 @@
 <body>
     <div class="background-container"></div>
 
-    <section class="image-section">
+    <section class="content">
         <h2>スタンプゲット！！</h2>
         <div class="image-gallery">
             <!-- study_image.jpgを中央配置 -->
@@ -154,14 +168,12 @@
         </div>
     </section>
 
-    <!-- フード画像 -->
     <div class="food-container">
         <img src="food.png" class="food-img" alt="フード">
     </div>
 
     <script>
         var image = document.getElementById('image');
-        var foodContainer = document.querySelector('.food-container');
 
         // 盛大な祝うアニメーション
         function celebrateAnimation() {
@@ -203,22 +215,6 @@
             }, 4000);
 
             celebrateAnimation();
-        };
-
-        // フード画像のスクロールに追従する処理
-        window.onscroll = function() {
-            var yOffset = window.pageYOffset;
-            var windowHeight = window.innerHeight;
-            var documentHeight = document.documentElement.scrollHeight;
-
-            var scrollPercentage = (yOffset / (documentHeight - windowHeight)) * 100;
-
-            if (scrollPercentage > 90) {
-                foodContainer.style.display = 'block';
-                foodContainer.style.transform = `translateX(-50%) translateY(-${scrollPercentage - 90}vh)`;
-            } else {
-                foodContainer.style.display = 'none';
-            }
         };
 
         var downloadButton = document.getElementById('downloadButton');
